@@ -1,15 +1,11 @@
 package com.rasulovabdullokh.testapp
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.ListView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.rasulovabdullokh.testapp.core.adapter.onBoardAdapter
 import com.rasulovabdullokh.testapp.core.database.DataBase
 import com.rasulovabdullokh.testapp.core.models.PageData
 import com.rasulovabdullokh.testapp.databinding.ActivityMainBinding
-import com.rasulovabdullokh.testapp.databinding.ItemBoardBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,9 +26,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadBoardData() {
-        // Бета версия для проверки функционала Вювпейджер В следующих обновлениях данные будем брать с базы SQLite
         val data = ArrayList<PageData>()
-        data.add(
+        for( item in data1){
+            data.add(
+                PageData(
+                    title = item.text,
+                    description = item.author
+
+                )
+            )
+        }
+        // Бета версия для проверки функционала Вювпейджер В следующих обновлениях данные будем брать с базы SQLite 1/00/30 36
+
+        /*data.add(
             PageData(
             title = "Halollikni ulug'lagan kishini Yaratgan Egam saxiy qiladi, ibodatda shayton vasvasidan asraydi.",
                 description = "Az-Zamaxshariy",
@@ -59,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Yunus Ibn Ubayd",
                 image = R.drawable.yunusibnubayd
             )
-        )
+        )*/
         adapter.data=data
     }
 }

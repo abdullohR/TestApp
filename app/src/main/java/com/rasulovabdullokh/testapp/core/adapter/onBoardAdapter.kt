@@ -17,7 +17,7 @@ class onBoardAdapter : RecyclerView.Adapter<onBoardAdapter.ViewHolder>(){
 
     inner class ViewHolder(val binding: ItemBoardBinding):RecyclerView.ViewHolder(binding.root){
         fun bindData(d: PageData){
-            binding.ivView.setImageResource(d.image)
+            /*binding.ivView.setImageResource(d.image)*/
             binding.title.text=d.title
             binding.description.text=d.description
 

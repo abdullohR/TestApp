@@ -32,9 +32,9 @@ public class DataBase  extends DbHelper {
         Cursor cursor = mDataBase.rawQuery(query,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            int id = cursor.getInt(0);
+            String author = cursor.getString(0);
             String sozlar = cursor.getString(1);
-            HikmatliGaplar hikmatliGaplar = new HikmatliGaplar(id,sozlar);
+            HikmatliGaplar hikmatliGaplar = new HikmatliGaplar(author,sozlar);
             gaplar.add(hikmatliGaplar);
             cursor.moveToNext();
         }
