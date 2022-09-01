@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.rasulovabdullokh.testapp.R
 import com.rasulovabdullokh.testapp.core.adapter.onBoardAdapter
 import com.rasulovabdullokh.testapp.core.database.DataBase
@@ -41,15 +42,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
         binding.telegramShare.setOnClickListener(){
-            Toast.makeText(this, "telegramShare", Toast.LENGTH_SHORT).show()
+            sendData("org.telegram.messenger")
         }
         binding.facebookShare.setOnClickListener(){
-            Toast.makeText(this, "facebookShare", Toast.LENGTH_SHORT).show()
+            sendData("com.facebook.katana")
         }
         binding.whatsAppShare.setOnClickListener{
-            Toast.makeText(this, "whatsAppShare", Toast.LENGTH_SHORT).show()
+            sendData("com.whatsapp")
         }
 
+    }
+
+    private fun sendData(string: String){
+        val myIntent = Intent(Intent.ACTION_SEND)
+        myIntent.type = "text/plain"
+        myIntent.setPackage(string)
+        myIntent.putExtra(Intent.EXTRA_TEXT, "link to download the application")
+        startActivity(Intent.createChooser(myIntent, "Share with"))
     }
 
     private fun loadBoardData() {
