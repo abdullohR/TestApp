@@ -1,11 +1,15 @@
-package com.rasulovabdullokh.testapp
+package com.rasulovabdullokh.testapp.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.rasulovabdullokh.testapp.R
 import com.rasulovabdullokh.testapp.core.adapter.onBoardAdapter
 import com.rasulovabdullokh.testapp.core.database.DataBase
 import com.rasulovabdullokh.testapp.core.models.PageData
 import com.rasulovabdullokh.testapp.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,12 +20,35 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_TestApp)
         _binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.onBoard.adapter=adapter
         loadBoardData()
+        share()
 
 
+    }
+
+    private fun share() {
+        binding.mainShare.setOnClickListener(){
+            val title = "link to download the application"
+            val description = "Hikmatli Gaplar"
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT,title)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, description)
+            startActivity(shareIntent)
+        }
+        binding.telegramShare.setOnClickListener(){
+            Toast.makeText(this, "telegramShare", Toast.LENGTH_SHORT).show()
+        }
+        binding.facebookShare.setOnClickListener(){
+            Toast.makeText(this, "facebookShare", Toast.LENGTH_SHORT).show()
+        }
+        binding.whatsAppShare.setOnClickListener{
+            Toast.makeText(this, "whatsAppShare", Toast.LENGTH_SHORT).show()
+        }
 
     }
 

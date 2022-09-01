@@ -3,18 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/main_background"
+    android:background="@color/black"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="vertical">
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/onBoard"
             android:layout_width="match_parent"
@@ -23,9 +15,77 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/arrow_back"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/arrow_forward"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="?actionBarSize">
+        <ImageView
+            android:id="@+id/telegramShare"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/telegram"/>
+        <ImageView
+            android:id="@+id/facebookShare"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/facebook"/>
+        <ImageView
+            android:id="@+id/whatsAppShare"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/whatsapp"/>
+        <ImageView
+            android:id="@+id/mainShare"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:src="@drawable/share"/>
     </LinearLayout>
 
 
+
+<!--private void openWhatsApp() {
+String smsNumber = "7****"; //without '+'
+try {
+    Intent sendIntent = new Intent("android.intent.action.MAIN");
+    //sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
+    sendIntent.setAction(Intent.ACTION_SEND);
+    sendIntent.setType("text/plain");
+    sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+    sendIntent.putExtra("jid", smsNumber + "@s.whatsapp.net"); //phone number without "+" prefix
+    sendIntent.setPackage("com.whatsapp");
+    startActivity(sendIntent);
+} catch(Exception e) {
+    Toast.makeText(this, "Error/n" + e.toString(), Toast.LENGTH_SHORT).show();
+ }
+
+}-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
