@@ -18,11 +18,10 @@ import java.io.OutputStream;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-
     private static final String TAG = "TTT";
     private static String DB_NAME;
     private static String DB_PATH;
-    private  final Context mContext;
+    private final Context mContext;
     protected SQLiteDatabase mDataBase;
 
     public DbHelper(@Nullable Context context, @Nullable String name) {
@@ -33,10 +32,8 @@ public class DbHelper extends SQLiteOpenHelper {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1) {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
         } else {
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/" ;
+            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
         }
-
-
 
         this.mContext = context;
 
@@ -49,7 +46,6 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
-
 
     private void createDataBase() throws IOException {
         //If the database does not exist, copy it from the assets.
@@ -67,7 +63,6 @@ public class DbHelper extends SQLiteOpenHelper {
             }
         }
     }
-
 
     //Check that the database exists here: /data/data/your package/databases/Da Name
     private boolean checkDataBase() {
@@ -109,7 +104,6 @@ public class DbHelper extends SQLiteOpenHelper {
             mDataBase.close();
         super.close();
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {

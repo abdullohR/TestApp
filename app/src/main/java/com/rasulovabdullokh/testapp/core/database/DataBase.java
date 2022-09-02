@@ -10,15 +10,17 @@ import com.rasulovabdullokh.testapp.core.models.HikmatliGaplar;
 
 import java.util.ArrayList;
 
-public class DataBase  extends DbHelper {
+public class DataBase extends DbHelper {
     public static DataBase dataBase;
+
     public DataBase(@Nullable Context context) {
-        super(context,"sozlar.db");
+        super(context, "sozlar.db");
 
     }
-    public static void init(Context context){
-        if(dataBase==null){
-            dataBase= new DataBase(context);
+
+    public static void init(Context context) {
+        if (dataBase == null) {
+            dataBase = new DataBase(context);
         }
     }
 
@@ -26,15 +28,15 @@ public class DataBase  extends DbHelper {
         return dataBase;
     }
 
-    public ArrayList<HikmatliGaplar> getSozlar(){
+    public ArrayList<HikmatliGaplar> getSozlar() {
         ArrayList<HikmatliGaplar> gaplar = new ArrayList<>();
         String query = "SELECT * FROM azzamaxshariy";
-        Cursor cursor = mDataBase.rawQuery(query,null);
+        Cursor cursor = mDataBase.rawQuery(query, null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             String author = cursor.getString(0);
             String sozlar = cursor.getString(1);
-            HikmatliGaplar hikmatliGaplar = new HikmatliGaplar(author,sozlar);
+            HikmatliGaplar hikmatliGaplar = new HikmatliGaplar(author, sozlar);
             gaplar.add(hikmatliGaplar);
             cursor.moveToNext();
         }
