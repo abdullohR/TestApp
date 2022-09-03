@@ -12,6 +12,7 @@ const val channelID = "Chanel1"
 const val titleExtra = "title"
 const val messageExtra = "messageExtra"
 
+/*
 class Notification : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -24,4 +25,4 @@ class Notification : BroadcastReceiver() {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify(notificationID, notification)
     }
-}
+}*/

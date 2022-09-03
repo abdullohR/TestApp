@@ -1,13 +1,24 @@
 package com.rasulovabdullokh.testapp.ui
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.rasulovabdullokh.testapp.R
 import com.rasulovabdullokh.testapp.core.adapter.ViewPagerAdapter
+import com.rasulovabdullokh.testapp.core.adapter.channelID
+import com.rasulovabdullokh.testapp.core.adapter.notificationID
 import com.rasulovabdullokh.testapp.core.database.DataBase
 import com.rasulovabdullokh.testapp.core.models.PageData
 import com.rasulovabdullokh.testapp.databinding.ActivityMainBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private val data1 = DataBase.getDataBase().sozlar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +36,47 @@ class MainActivity : AppCompatActivity() {
         binding.onBoard.adapter = adapter
         loadBoardData()
         share()
-        createNotification()
+        /*createNotification()*/
 
     }
 
+    /*@RequiresApi(Build.VERSION_CODES.M)
     private fun scheduleNotification() {
-
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
     }
+*/
+    /*private fun getTime(): Long {
+        val minute = 17
+        val hour = 14
 
+        val calendar = Calendar.getInstance()
+        calendar.set(minute,hour)
+        return calendar.timeInMillis
+    }*/
+
+    /*@RequiresApi(Build.VERSION_CODES.O)
     private fun createNotification() {
+        val name = "Notification channel"
+        val desc = "Description"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name, importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
 
-    }
+    }*/
 
     private fun share() {
         binding.mainShare.setOnClickListener() {

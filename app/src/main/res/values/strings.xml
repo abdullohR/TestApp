@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestApp</string>
+    <string name="app_name">Hikmatli So\'zlar</string>
     <string name="WhatsApp">com.whatsapp</string>
     <string name="Facebook">com.facebook.katana</string>
     <string name="Telegram">org.telegram.messenger</string>
