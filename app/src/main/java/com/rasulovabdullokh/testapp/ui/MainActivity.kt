@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.rasulovabdullokh.testapp.R
@@ -27,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private val data1 = DataBase.getDataBase().sozlar
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_TestApp)
@@ -35,9 +36,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.onBoard.adapter = adapter
         loadBoardData()
-        share()
         /*createNotification()*/
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.telegram -> sendData(getString(R.string.Telegram))
+            R.id.facebook -> sendData(getString(R.string.Facebook))
+            R.id.whatsApp -> sendData(getString(R.string.WhatsApp))
+            R.id.mainSh -> share()
+        }
+        return true
+    }
+    private fun share(){
+        val title = "link to download the application"
+        val description = "Hikmatli So'zalr"
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+        shareIntent.putExtra(Intent.EXTRA_TEXT, description)
+        startActivity(shareIntent)
     }
 
     /*@RequiresApi(Build.VERSION_CODES.M)
@@ -78,27 +102,7 @@ class MainActivity : AppCompatActivity() {
 
     }*/
 
-    private fun share() {
-        binding.mainShare.setOnClickListener() {
-            val title = "link to download the application"
-            val description = "Hikmatli Gaplar"
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
-            shareIntent.putExtra(Intent.EXTRA_TEXT, description)
-            startActivity(shareIntent)
-        }
-        binding.telegramShare.setOnClickListener() {
-            sendData(getString(R.string.Telegram))
-        }
-        binding.facebookShare.setOnClickListener() {
-            sendData(getString(R.string.Facebook))
-        }
-        binding.whatsAppShare.setOnClickListener {
-            sendData(getString(R.string.WhatsApp))
-        }
 
-    }
 
     private fun sendData(string: String) {
         val myIntent = Intent(Intent.ACTION_SEND)
