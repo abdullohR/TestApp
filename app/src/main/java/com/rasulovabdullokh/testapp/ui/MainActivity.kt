@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.rasulovabdullokh.testapp.R
 import com.rasulovabdullokh.testapp.core.adapter.ViewPagerAdapter
 import com.rasulovabdullokh.testapp.core.adapter.channelID
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_TestApp)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         binding.onBoard.adapter = adapter
         loadBoardData()
         /*createNotification()*/

@@ -8,26 +8,30 @@
         android:title="Share"
         app:showAsAction="always">
         <menu>
-            <item android:id="@+id/telegram"
+            <item
+                android:id="@+id/telegram"
                 android:icon="@drawable/menu_telegram"
-                app:showAsAction="never"
                 android:orderInCategory="100"
-                android:title="@string/Telegram" />
-            <item android:id="@+id/facebook"
+                android:title="@string/Telegram"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/facebook"
                 android:icon="@drawable/menu_facebook"
-                app:showAsAction="never"
                 android:orderInCategory="100"
-                android:title="@string/Facebook" />
-            <item android:id="@+id/whatsApp"
+                android:title="@string/Facebook"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/whatsApp"
                 android:icon="@drawable/menu_whatsapp"
-                app:showAsAction="never"
                 android:orderInCategory="100"
-                android:title="@string/WhatsApp" />
-            <item android:id="@+id/mainSh"
+                android:title="@string/WhatsApp"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mainSh"
                 android:icon="@drawable/menu_share"
-                app:showAsAction="never"
                 android:orderInCategory="100"
-                android:title="Umumiy share" />
+                android:title="Umumiy share"
+                app:showAsAction="never" />
         </menu>
     </item>
 </menu>
