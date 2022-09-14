@@ -1,22 +1,16 @@
 package com.rasulovabdullokh.testapp.ui
 
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.annotation.RequiresApi
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.rasulovabdullokh.testapp.R
 import com.rasulovabdullokh.testapp.core.adapter.ViewPagerAdapter
-import com.rasulovabdullokh.testapp.core.adapter.channelID
-import com.rasulovabdullokh.testapp.core.adapter.notificationID
 import com.rasulovabdullokh.testapp.core.database.DataBase
 import com.rasulovabdullokh.testapp.core.models.PageData
 import com.rasulovabdullokh.testapp.databinding.ActivityMainBinding
@@ -38,73 +32,37 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         binding.onBoard.adapter = adapter
         loadBoardData()
-        /*createNotification()*/
+        share()
+        setStatusBar()
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.app_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.telegram -> sendData(getString(R.string.Telegram))
-            R.id.facebook -> sendData(getString(R.string.Facebook))
-            R.id.whatsApp -> sendData(getString(R.string.WhatsApp))
-            R.id.mainSh -> share()
+    private fun share() {
+        binding.shareImage.setOnClickListener() {
+            val title = "link to download the application"
+            val description = "Hikmatli Gaplar"
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, description)
+            startActivity(shareIntent)
         }
-        return true
+        binding.telegramShare.setOnClickListener {
+            sendData(getString(R.string.Telegram))
+        }
+        binding.shareWhatsApp.setOnClickListener {
+            sendData(getString(R.string.WhatsApp))
+
+        }
     }
-    private fun share(){
-        val title = "link to download the application"
-        val description = "Hikmatli So'zalr"
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
-        shareIntent.putExtra(Intent.EXTRA_TEXT, description)
-        startActivity(shareIntent)
+    private fun setStatusBar() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        }
+
     }
-
-    /*@RequiresApi(Build.VERSION_CODES.M)
-    private fun scheduleNotification() {
-        val pendingIntent = PendingIntent.getBroadcast(
-            applicationContext,
-            notificationID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val time = getTime()
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            time,
-            pendingIntent
-        )
-    }
-*/
-    /*private fun getTime(): Long {
-        val minute = 17
-        val hour = 14
-
-        val calendar = Calendar.getInstance()
-        calendar.set(minute,hour)
-        return calendar.timeInMillis
-    }*/
-
-    /*@RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotification() {
-        val name = "Notification channel"
-        val desc = "Description"
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(channelID, name, importance)
-        channel.description = desc
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
-
-    }*/
-
-
 
     private fun sendData(string: String) {
         val myIntent = Intent(Intent.ACTION_SEND)
@@ -119,12 +77,13 @@ class MainActivity : AppCompatActivity() {
         for (item in data1) {
             data.add(
                 PageData(
-                    title = item.text,
-                    description = item.author
+                    description = item.text,
+                    title = item.author
 
                 )
             )
         }
+        data.shuffle()
 
         adapter.data = data
     }

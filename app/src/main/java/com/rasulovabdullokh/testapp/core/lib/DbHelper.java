@@ -29,11 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         DB_NAME = name;
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        } else {
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        }
+        DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
 
         this.mContext = context;
 

@@ -14,7 +14,7 @@ public class DataBase extends DbHelper {
     public static DataBase dataBase;
 
     public DataBase(@Nullable Context context) {
-        super(context, "sozlar.db");
+        super(context, "quotes.db");
 
     }
 
@@ -30,12 +30,12 @@ public class DataBase extends DbHelper {
 
     public ArrayList<HikmatliGaplar> getSozlar() {
         ArrayList<HikmatliGaplar> gaplar = new ArrayList<>();
-        String query = "SELECT * FROM azzamaxshariy";
+        String query = "SELECT * FROM QUOTE_TABLE";
         Cursor cursor = mDataBase.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            String author = cursor.getString(0);
-            String sozlar = cursor.getString(1);
+            String author = cursor.getString(1);
+            String sozlar = cursor.getString(2);
             HikmatliGaplar hikmatliGaplar = new HikmatliGaplar(author, sozlar);
             gaplar.add(hikmatliGaplar);
             cursor.moveToNext();
