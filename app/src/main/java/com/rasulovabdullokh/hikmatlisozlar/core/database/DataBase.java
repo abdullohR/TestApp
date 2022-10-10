@@ -1,16 +1,17 @@
-package com.rasulovabdullokh.testapp.core.database;
+package com.rasulovabdullokh.hikmatlisozlar.core.database;
 
 import android.content.Context;
 import android.database.Cursor;
 
 import androidx.annotation.Nullable;
 
-import com.rasulovabdullokh.testapp.core.lib.DbHelper;
-import com.rasulovabdullokh.testapp.core.models.HikmatliGaplar;
+import com.rasulovabdullokh.hikmatlisozlar.core.lib.DbHelper;
+import com.rasulovabdullokh.hikmatlisozlar.core.models.HikmatliGaplar;
 
 import java.util.ArrayList;
 
 public class DataBase extends DbHelper {
+
     public static DataBase dataBase;
 
     public DataBase(@Nullable Context context) {

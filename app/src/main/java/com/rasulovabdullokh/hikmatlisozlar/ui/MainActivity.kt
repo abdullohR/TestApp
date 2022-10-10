@@ -1,24 +1,24 @@
-package com.rasulovabdullokh.testapp.ui
+package com.rasulovabdullokh.hikmatlisozlar.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.rasulovabdullokh.testapp.R
-import com.rasulovabdullokh.testapp.core.adapter.ViewPagerAdapter
-import com.rasulovabdullokh.testapp.core.database.DataBase
-import com.rasulovabdullokh.testapp.core.models.PageData
-import com.rasulovabdullokh.testapp.databinding.ActivityMainBinding
+import com.rasulovabdullokh.hikmatlisozlar.R
+import com.rasulovabdullokh.hikmatlisozlar.core.adapter.ViewPagerAdapter
+import com.rasulovabdullokh.hikmatlisozlar.core.database.DataBase
+import com.rasulovabdullokh.hikmatlisozlar.core.models.PageData
+import com.rasulovabdullokh.hikmatlisozlar.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SendData {
 
+    private val link = "There will be a link to the application."
+    private var quote = ""
+    private var author = ""
     private val adapter = ViewPagerAdapter()
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         binding.onBoard.adapter = adapter
+        adapter.setOnClick(this)
+        adapter.setViewScroll(binding.onBoard)
         loadBoardData()
         share()
         setStatusBar()
@@ -39,12 +41,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun share() {
         binding.shareImage.setOnClickListener() {
-            val title = "link to download the application"
-            val description = "Hikmatli Gaplar"
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
-            shareIntent.putExtra(Intent.EXTRA_TEXT, description)
+
+            shareIntent.putExtra(
+                Intent.EXTRA_TEXT,
+                "$quote\n\n$author\n\nUlug' donishmandlarning hikmatli so'zlaridan bahramand bo'ling. Qalblaringizni go'zal hikmat jilolari ila to'ldiring... \"Hikmatli So'zlar\" dasturimizni ko'chirib oling\n\n $link"
+            )
             startActivity(shareIntent)
         }
         binding.telegramShare.setOnClickListener {
@@ -55,12 +58,13 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
     private fun setStatusBar() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        }
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
 
     }
 
@@ -68,7 +72,10 @@ class MainActivity : AppCompatActivity() {
         val myIntent = Intent(Intent.ACTION_SEND)
         myIntent.type = "text/plain"
         myIntent.setPackage(string)
-        myIntent.putExtra(Intent.EXTRA_TEXT, "link to download the application")
+        myIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "$quote\n\n$author\n\nUlug' donishmandlarning hikmatli so'zlaridan bahramand bo'ling. Qalblaringizni go'zal hikmat jilolari ila to'ldiring... \"Hikmatli So'zlar\" dasturimizni ko'chirib oling\n\n $link"
+        )
         startActivity(Intent.createChooser(myIntent, "Share with"))
     }
 
@@ -86,5 +93,11 @@ class MainActivity : AppCompatActivity() {
         data.shuffle()
 
         adapter.data = data
+    }
+
+    override fun sendData(quote: String, author: String) {
+        this.quote = quote
+        this.author = author
+
     }
 }

@@ -1,5 +1,4 @@
-package com.rasulovabdullokh.testapp.core.models
-
+package com.rasulovabdullokh.hikmatlisozlar.core.models
 
 class PageData(
     val title: String,

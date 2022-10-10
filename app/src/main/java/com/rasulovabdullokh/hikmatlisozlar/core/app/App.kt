@@ -1,7 +1,7 @@
-package com.rasulovabdullokh.testapp.core.app
+package com.rasulovabdullokh.hikmatlisozlar.core.app
 
 import android.app.Application
-import com.rasulovabdullokh.testapp.core.database.DataBase
+import com.rasulovabdullokh.hikmatlisozlar.core.database.DataBase
 
 class App : Application() {
 

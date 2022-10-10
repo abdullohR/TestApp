@@ -1,12 +1,10 @@
-package com.rasulovabdullokh.testapp.core.lib;
+package com.rasulovabdullokh.hikmatlisozlar.core.lib;
 
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 

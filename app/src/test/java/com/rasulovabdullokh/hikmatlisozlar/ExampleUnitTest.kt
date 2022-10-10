@@ -1,4 +1,4 @@
-package com.rasulovabdullokh.testapp
+package com.rasulovabdullokh.hikmatlisozlar
 
 import org.junit.Test
 
